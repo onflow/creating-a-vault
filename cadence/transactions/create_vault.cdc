@@ -12,18 +12,21 @@ transaction {
 
         log("Empty Vault stored")
 
-        // Create a public Receiver capability to the Vault
-        let receiverCap = acct.capabilities.storage.issue<&ExampleToken.Vault{ExampleToken.Receiver, ExampleToken.Balance}>(/storage/MainVault)
+        // Create a public capability to the Vault for the Receiver interface
+        let receiverCap = acct.capabilities.storage.issue<&ExampleToken.Vault>(/storage/MainVault)
         acct.capabilities.publish(receiverCap, at: /public/MainReceiver)
 
-        log("References created")
-    }
+        log("Receiver capability created")
 
-    post {
+        // Create a public capability to the Vault for the Balance interface
+        let balanceCap = acct.capabilities.storage.issue<&ExampleToken.Vault>(/storage/MainVault)
+        acct.capabilities.publish(balanceCap, at: /public/MainBalance)
+
+        log("Balance capability created")
+
         // Check that the capabilities were created correctly
-        getAccount(0x02)
-            .capabilities
-            .borrow<&ExampleToken.Vault{ExampleToken.Receiver}>(/public/MainReceiver) != nil: 
-            "Vault Receiver Reference was not created correctly"
+        let account = getAccount(acct.address)
+        assert(account.capabilities.borrow<&ExampleToken.Vault>(/public/MainReceiver) != nil, 
+               message: "Vault Receiver Reference was not created correctly")
     }
 }
