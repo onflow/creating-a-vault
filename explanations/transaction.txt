@@ -1,5 +1,6 @@
-Here we are creating a new Vault resource into an account.
 
-When that is created and stored into their private storage, we then create public capabilities that others can use to check balance, or deposit tokens.
+This transaction sets up an account to store and manage tokens using the ExampleToken contract. It begins by creating a new, empty Vault to hold tokens, which is initialized with a balance of 0.0. This vault is then stored in the account's private storage. 
 
-Once we do that, we check to make sure that the capabilities were indeed created and then we are done with the transaction.
+After that, the transaction creates two public capabilities: one for the Receiver interface, allowing others to deposit tokens into the vault, and another for the Balance interface, enabling others to check the vault's balance. These capabilities are published to public paths so they can be accessed externally.
+
+Finally, the transaction checks that the public capability for receiving tokens was correctly created by attempting to borrow it from the account.
