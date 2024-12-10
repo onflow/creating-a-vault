@@ -1,8 +1,10 @@
 
+import "FlowToken"
+
 access(all) contract Recipe {
     // Creating an empty vault
     access(all)
-    fun createEmptyVault(): @Vault {
-        return <-create Vault(balance: 0.0)
+    fun createEmptyVault(): @FlowToken.Vault {
+        return <-create FlowToken.Vault(balance: 0.0)
     }
 }
