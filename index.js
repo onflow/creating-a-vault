@@ -23,6 +23,6 @@ export const creatingAVault = {
   transactionCode: transactionPath,
   transactionExplanation: transactionExplanationPath,
   filters: {
-    difficulty: "intermediate"
-  }
+    difficulty: "intermediate",
+  },
 };
