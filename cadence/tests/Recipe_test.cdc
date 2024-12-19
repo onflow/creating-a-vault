@@ -3,7 +3,7 @@ import Test
 access(all)
 fun setup() {
     let err = Test.deployContract(
-        name: "Recipe",
+        name: "ExampleToken",
         path: "../contracts/Recipe.cdc",
         arguments: [],
     )
